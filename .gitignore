@@ -21,3 +21,31 @@ local.properties
 
 # Idea Files
 .idea/
+
+# Microsoft specific
+bin
+obj
+
+# mstest test results
+TestResults
+
+#Resharper files
+_ReSharper.*/
+*.Resharper.user
+
+#Publish files
+*.publish.xml
+*.pubxml
+
+#VS local-only files
+*.suo
+*.user
+*.vspscc
+*.vssscc
+*.dbmdl
+*.refactorlog
+*.vsmdi
+*.webtestresult
+FakesAssemblies
+*.fakes
+*.log
