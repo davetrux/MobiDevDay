@@ -23,8 +23,8 @@ local.properties
 .idea/
 
 # Microsoft specific
-bin
-obj
+bin/
+obj/
 
 # mstest test results
 TestResults
@@ -49,3 +49,4 @@ _ReSharper.*/
 FakesAssemblies
 *.fakes
 *.log
+packages/
