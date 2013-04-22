@@ -27,6 +27,7 @@
     <orderEntry type="library" name="JAX-RS" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="AppEngine Dev" level="application_server_libraries" />
     <orderEntry type="library" name="AppEngine API" level="project" />
+    <orderEntry type="library" name="google-api-1.14.1" level="project" />
   </component>
 </module>
 

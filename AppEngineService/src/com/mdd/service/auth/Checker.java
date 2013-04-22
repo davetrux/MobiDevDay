@@ -48,7 +48,7 @@ public class Checker {
         return payload;
     }
 
-    public String problem() {
+    public String getProblem() {
         return mProblem;
     }
 }
