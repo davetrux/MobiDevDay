@@ -128,6 +128,7 @@
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\PersonGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NameService.cs" />
   </ItemGroup>
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Forms.pubxml" />
+    <None Include="Properties\PublishProfiles\Win.pubxml" />
     <None Include="Scripts\jquery-2.0.0.min.map" />
   </ItemGroup>
   <PropertyGroup>

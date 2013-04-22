@@ -4,6 +4,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using PersonDotNetService.Models;
+using System.Diagnostics;
 
 namespace PersonDotNetService.Services
 {
@@ -12,56 +13,13 @@ namespace PersonDotNetService.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class NameService
     {
-        public Person GetRandomName()
-        {
-            var result = new Person();
-            var generator = new Random();
-
-            var r = generator.Next(Constants.Surnames.Length);
-            
-            result.LastName = Constants.Surnames[r];
-
-            if (r % 2 == 0)
-            {
-                r = generator.Next(Constants.Female.Length);
-                result.FirstName=Constants.Female[r];
-                result.Gender="f";
-            }
-            else
-            {
-                r = generator.Next(Constants.Male.Length);
-                result.FirstName=Constants.Male[r];
-                result.Gender="m";
-            }
-
-            return result;
-        }
-
         [WebInvoke(UriTemplate = "name/{gender}", Method = "GET", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json)]
-        public Person GetRandomName(string gender)
+        public Person GetSingleName(string gender)
         {
-            var result = new Person();
-            var generator = new Random();
+            var generator = new PersonGenerator();
 
-            var r = generator.Next(Constants.Surnames.Length);
-
-            result.LastName=Constants.Surnames[r];
-
-            if (string.Equals(gender, "f", StringComparison.OrdinalIgnoreCase))
-            {
-                r = generator.Next(Constants.Female.Length);
-                result.FirstName = Constants.Female[r];
-                result.Gender = "f";
-            }
-            else
-            {
-                r = generator.Next(Constants.Male.Length);
-                result.FirstName = Constants.Male[r];
-                result.Gender = "m";
-            }
-
-            return result;
+            return generator.GetRandomName(gender);
         }
 
         [WebInvoke(UriTemplate = "names/{count}", Method = "GET", RequestFormat = WebMessageFormat.Json,
@@ -70,10 +28,13 @@ namespace PersonDotNetService.Services
         {
             var total = int.Parse(count);
             var result = new List<Person>();
+            var generator = new PersonGenerator();
 
             for (var i = 0; i < total; i++)
             {
-                result.Add(GetRandomName());
+                var person = generator.GetRandomName();
+                Debug.WriteLine("{0} {1}", person.FirstName, person.LastName);
+                result.Add(person);
             }
 
             return result;
