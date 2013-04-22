@@ -1,13 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
+<TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-    <Button
-            android:id="@+id/device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/device_account"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
-</RelativeLayout>
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:stretchColumns="*">
+    <TableRow>
+        <Button
+                android:id="@+id/forms"
+                style="@style/AuthButton"
+                android:text="@string/form_account"/>
+        <Button
+                android:id="@+id/basic"
+                style="@style/AuthButton"
+                android:text="@string/basic_account"/>
+    </TableRow>
+    <TableRow>
+        <Button
+                android:id="@+id/windows"
+                style="@style/AuthButton"
+                android:text="@string/windows_account"/>
+        <Button
+                android:id="@+id/device"
+                style="@style/AuthButton"
+                android:text="@string/device_account"/>
+    </TableRow>
+    <TableRow>
+        <ListView
+                style="@style/Results"
+                android:id="@+id/personList"
+                android:layout_span="2"/>
+    </TableRow>
+</TableLayout>

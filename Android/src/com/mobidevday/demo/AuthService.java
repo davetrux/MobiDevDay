@@ -12,18 +12,62 @@ import java.io.IOException;
 
 public class AuthService extends IntentService {
 
-    public static final String AUTH_RESULT="AUTH-RESULT";
+    public static final String AUTH_RESULT = "AUTH-RESULT";
 
-    public AuthService(){
+    public AuthService() {
         super("AuthService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        if("google-auth".equals(intent.getAction())){
+        if ("google-auth".equals(intent.getAction())) {
             authenticateGoogle(intent.getStringExtra("account"));
         }
+        else {
+            String url = intent.getStringExtra("url");
+
+            if ("oauth-data".equals(intent.getAction())) {
+                getOauthData(intent.getStringExtra("token"), url);
+            } else if ("basic-data".equals(intent.getAction())) {
+                getBasicData(intent.getStringExtra("user"), intent.getStringExtra("password"), url);
+            }
+        }
+    }
+
+    private void getOauthData(String token, String url) {
+        WebHelper http = new WebHelper();
+        String webResult;
+        int result = -1;
+        try {
+            webResult = http.getHttp(url, token);
+            if(!webResult.equalsIgnoreCase("")) {
+                result = Activity.RESULT_OK;
+            }
+        } catch (IOException e) {
+            webResult = "";
+            Log.d(getClass().getName(), "Exception calling service", e);
+        }
+
+        sendResult(webResult, AUTH_RESULT, "oauth-data", result);
+    }
+
+
+    private void getBasicData(String user, String password, String url) {
+        WebHelper http = new WebHelper();
+        String webResult;
+        int result = -1;
+        try {
+            webResult = http.getHttp(url, user, password);
+            if(!webResult.equalsIgnoreCase("")) {
+                result = Activity.RESULT_OK;
+            }
+        } catch (IOException e) {
+            webResult = "";
+            Log.d(getClass().getName(), "Exception calling service", e);
+        }
+
+        sendResult(webResult, AUTH_RESULT, "oauth-data", result);
     }
 
 
@@ -37,7 +81,7 @@ public class AuthService extends IntentService {
             Log.d("IO error", e.getMessage());
         } catch (GoogleAuthException ge) {
             Log.d("Google auth error", ge.getMessage());
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             Log.d("error", ex.getMessage());
         }
     }

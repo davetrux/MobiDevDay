@@ -2,4 +2,10 @@
 <resources>
     <string name="app_name">Authenticator</string>
     <string name="device_account">Device Account</string>
+    <string name="form_account">Web Form</string>
+    <string name="windows_account">Windows</string>
+    <string name="basic_account">HTTP Basic</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>
