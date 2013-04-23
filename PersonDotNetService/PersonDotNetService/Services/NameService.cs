@@ -33,7 +33,7 @@ namespace PersonDotNetService.Services
             for (var i = 0; i < total; i++)
             {
                 var person = generator.GetRandomName();
-                Debug.WriteLine("{0} {1}", person.FirstName, person.LastName);
+                Debug.WriteLine("{0} {1}", person.firstName, person.lastName);
                 result.Add(person);
             }
 

@@ -16,19 +16,19 @@ namespace PersonDotNetService.Models
 
             var r = generator.Next(Constants.Surnames.Length);
 
-            result.LastName = Constants.Surnames[r];
+            result.lastName = Constants.Surnames[r];
 
             if (r % 2 == 0)
             {
                 r = generator.Next(Constants.Female.Length);
-                result.FirstName = Constants.Female[r];
-                result.Gender = "f";
+                result.firstName = Constants.Female[r];
+                result.gender = "f";
             }
             else
             {
                 r = generator.Next(Constants.Male.Length);
-                result.FirstName = Constants.Male[r];
-                result.Gender = "m";
+                result.firstName = Constants.Male[r];
+                result.gender = "m";
             }
             lastId++;
             return result;
@@ -41,19 +41,19 @@ namespace PersonDotNetService.Models
 
             var r = generator.Next(Constants.Surnames.Length);
 
-            result.LastName = Constants.Surnames[r];
+            result.lastName = Constants.Surnames[r];
 
             if (string.Equals(gender, "f", StringComparison.OrdinalIgnoreCase))
             {
                 r = generator.Next(Constants.Female.Length);
-                result.FirstName = Constants.Female[r];
-                result.Gender = "f";
+                result.firstName = Constants.Female[r];
+                result.gender = "f";
             }
             else
             {
                 r = generator.Next(Constants.Male.Length);
-                result.FirstName = Constants.Male[r];
-                result.Gender = "m";
+                result.firstName = Constants.Male[r];
+                result.gender = "m";
             }
 
             return result;
