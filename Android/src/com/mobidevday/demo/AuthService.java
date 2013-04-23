@@ -24,6 +24,9 @@ public class AuthService extends IntentService {
         if ("google-auth".equals(intent.getAction())) {
             authenticateGoogle(intent.getStringExtra("account"));
         }
+        else if ("forms-auth".equals(intent.getAction())) {
+            getFormsData(intent.getStringExtra("url"), intent.getStringExtra("cookie"));
+        }
         else {
             String url = intent.getStringExtra("url");
 
@@ -52,6 +55,22 @@ public class AuthService extends IntentService {
         sendResult(webResult, AUTH_RESULT, "oauth-data", result);
     }
 
+    private void getFormsData(String url, String cookie){
+        WebHelper http = new WebHelper();
+        String webResult;
+        int result = -1;
+        try {
+            webResult = http.getHttp(url, cookie);
+            if(!webResult.equalsIgnoreCase("")) {
+                result = Activity.RESULT_OK;
+            }
+        } catch (IOException e) {
+            webResult = "";
+            Log.d(getClass().getName(), "Exception calling service", e);
+        }
+
+        sendResult(webResult, AUTH_RESULT, "forms-data", result);
+    }
 
     private void getBasicData(String user, String password, String url) {
         WebHelper http = new WebHelper();

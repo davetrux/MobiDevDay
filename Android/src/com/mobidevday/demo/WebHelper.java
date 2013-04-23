@@ -23,12 +23,11 @@ public class WebHelper {
         return info != null && info.isConnected();
     }
 
-
-    public String getHttp(String url, String token) throws IOException {
+    public String getHttp(String url, String cookie) throws IOException {
 
         //Set up the HTTP calls
         HttpGet request = new HttpGet(url);
-        request.addHeader("Authorization", String.format("Bearer {0}", token));
+        request.addHeader("Cookie", cookie);
 
         HttpResponse response = mClient.execute(request);
 
@@ -39,6 +38,22 @@ public class WebHelper {
      	stream.close();
         return json;
     }
+
+//    public String getHttp(String url, String token) throws IOException {
+//
+//        //Set up the HTTP calls
+//        HttpGet request = new HttpGet(url);
+//        request.addHeader("Authorization", String.format("Bearer {0}", token));
+//
+//        HttpResponse response = mClient.execute(request);
+//
+//        //Get the data from the body of the response
+//        InputStream stream = response.getEntity().getContent();
+//     	byte byteArray[] = IOUtils.toByteArray(stream);
+//     	String json = new String( byteArray );
+//     	stream.close();
+//        return json;
+//    }
 
     public String getHttp(String url, String user, String password) throws IOException {
 

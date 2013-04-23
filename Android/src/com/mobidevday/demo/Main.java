@@ -152,7 +152,7 @@ public class Main extends Activity {
 
     }
 
-        /*
+    /*
      * The listener that responds to intents sent back from the service
      */
     private BroadcastReceiver onAuthenticate = new BroadcastReceiver() {
