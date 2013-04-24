@@ -8,4 +8,5 @@
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="domain">Domain</string>
 </resources>

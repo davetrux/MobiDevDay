@@ -17,12 +17,27 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/domain"
+                android:id="@+id/domain_label"/>
+        <EditText
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/domain"
+                android:inputType="text"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/user_name"
                 android:id="@+id/user_name_label"/>
         <EditText
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/user_name"/>
+                android:id="@+id/user_name"
+                android:inputType="text"/>
     </TableRow>
     <TableRow
             android:layout_width="fill_parent"
@@ -35,7 +50,8 @@
         <EditText
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/password"/>
+                android:id="@+id/password"
+                android:inputType="textVisiblePassword"/>
     </TableRow>
     <TableRow
             android:layout_width="fill_parent"

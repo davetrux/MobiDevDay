@@ -27,6 +27,9 @@ public class AuthService extends IntentService {
         else if ("forms-auth".equals(intent.getAction())) {
             getFormsData(intent.getStringExtra("url"), intent.getStringExtra("cookie"));
         }
+        else if ("windows-auth".equals(intent.getAction())) {
+            getWindowsData(intent.getStringExtra("url"), intent.getStringExtra("username"), intent.getStringExtra("password"), intent.getStringExtra("domain"));
+        }
         else {
             String url = intent.getStringExtra("url");
 
@@ -53,6 +56,23 @@ public class AuthService extends IntentService {
         }
 
         sendResult(webResult, AUTH_RESULT, "oauth-data", result);
+    }
+
+    private void getWindowsData(String url, String userName, String password, String domain){
+        WebHelper http = new WebHelper();
+        String webResult;
+        int result = -1;
+        try {
+            webResult = http.getHttp(url, userName, password, domain);
+            if(!webResult.equalsIgnoreCase("")) {
+                result = Activity.RESULT_OK;
+            }
+        } catch (IOException e) {
+            webResult = "";
+            Log.d(getClass().getName(), "Exception calling service", e);
+        }
+
+        sendResult(webResult, AUTH_RESULT, "windows-data", result);
     }
 
     private void getFormsData(String url, String cookie){
