@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.CookieManager;
 import android.widget.*;
 import com.mobidevday.demo.AuthService;
@@ -31,6 +32,13 @@ public class Windows extends BaseActivity {
 
     private View.OnClickListener loginListener = new View.OnClickListener(){
             public void onClick(View v){
+                //Get rid of the keyboard
+                InputMethodManager inputManager = (InputMethodManager)
+                                                  getSystemService(Windows.this.INPUT_METHOD_SERVICE);
+
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                                                     InputMethodManager.HIDE_NOT_ALWAYS);
+
 
                 EditText domainField = (EditText) findViewById(R.id.domain);
                 EditText userNameField = (EditText) findViewById(R.id.user_name);

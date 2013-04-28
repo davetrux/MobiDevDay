@@ -15,7 +15,6 @@
         <activity android:name=".activities.Basic"/>
         <activity android:name=".activities.Windows"/>
         <activity android:name=".activities.Form"/>
-        <activity android:name=".activities.Web"/>
         <activity android:name=".activities.BaseActivity"/>
         <service android:name=".AuthService"></service>
     </application>

@@ -30,6 +30,9 @@ public class AuthService extends IntentService {
         else if ("windows-auth".equals(intent.getAction())) {
             getWindowsData(intent.getStringExtra("url"), intent.getStringExtra("username"), intent.getStringExtra("password"), intent.getStringExtra("domain"));
         }
+        else if ("basic-auth".equals(intent.getAction())){
+            getBasicData(intent.getStringExtra("url"), intent.getStringExtra("username"), intent.getStringExtra("password"));
+        }
         else {
             String url = intent.getStringExtra("url");
 
@@ -92,7 +95,7 @@ public class AuthService extends IntentService {
         sendResult(webResult, AUTH_RESULT, "forms-data", result);
     }
 
-    private void getBasicData(String user, String password, String url) {
+    private void getBasicData(String url, String user, String password) {
         WebHelper http = new WebHelper();
         String webResult;
         int result = -1;
