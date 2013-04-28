@@ -33,9 +33,8 @@ public class Checker {
             GoogleIdToken token = GoogleIdToken.parse(mJFactory, tokenString);
             if (mVerifier.verify(token)) {
                 GoogleIdToken.Payload tempPayload = token.getPayload();
-                if (!tempPayload.getAudience().equals(mAudience))
-                    mProblem = "Audience mismatch";
-                else if (!mClientIDs.contains(tempPayload.getIssuee()))
+
+                if (!mClientIDs.contains(tempPayload.getAudience()))
                     mProblem = "Client ID mismatch";
                 else
                     payload = tempPayload;

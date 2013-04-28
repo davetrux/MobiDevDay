@@ -8,6 +8,7 @@ import java.util.Properties;
 public class Key {
 
     private String mGoogleKey;
+    private String mAudience;
 
     public Key() {
         loadProperties();
@@ -15,6 +16,10 @@ public class Key {
 
     public String getGoogleKey() {
         return mGoogleKey;
+    }
+
+    public String getAudience(){
+        return mAudience;
     }
 
     private void loadProperties() {
@@ -25,6 +30,7 @@ public class Key {
             properties.load(fis);
 
             mGoogleKey = properties.getProperty("google");
+            mAudience = properties.getProperty("audience");
 
         } catch (FileNotFoundException e) {
             //Should have actual logging here
