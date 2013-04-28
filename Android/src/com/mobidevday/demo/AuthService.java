@@ -22,7 +22,8 @@ public class AuthService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         if ("google-auth".equals(intent.getAction())) {
-            authenticateGoogle(intent.getStringExtra("account"));
+            String token = authenticateGoogle(intent.getStringExtra("account"));
+            getOauthData(intent.getStringExtra("url"), token);
         }
         else if ("forms-auth".equals(intent.getAction())) {
             getFormsData(intent.getStringExtra("url"), intent.getStringExtra("cookie"));
@@ -33,23 +34,15 @@ public class AuthService extends IntentService {
         else if ("basic-auth".equals(intent.getAction())){
             getBasicData(intent.getStringExtra("url"), intent.getStringExtra("username"), intent.getStringExtra("password"));
         }
-        else {
-            String url = intent.getStringExtra("url");
-
-            if ("oauth-data".equals(intent.getAction())) {
-                getOauthData(intent.getStringExtra("token"), url);
-            } else if ("basic-data".equals(intent.getAction())) {
-                getBasicData(intent.getStringExtra("user"), intent.getStringExtra("password"), url);
-            }
-        }
     }
 
-    private void getOauthData(String token, String url) {
+    private void getOauthData(String url, String token) {
         WebHelper http = new WebHelper();
         String webResult;
         int result = -1;
         try {
-            webResult = http.getHttp(url, token);
+            String urlPlusToken = String.format("%s?token=%s", url, token);
+            webResult = http.getHttp(urlPlusToken);
             if(!webResult.equalsIgnoreCase("")) {
                 result = Activity.RESULT_OK;
             }
@@ -113,12 +106,12 @@ public class AuthService extends IntentService {
     }
 
 
-    private void authenticateGoogle(String accountName) {
-        String token;
+    private String authenticateGoogle(String accountName) {
+        String token = "";
         try {
             Key props = new Key();
             token = GoogleAuthUtil.getToken(this, accountName, props.getGoogleKey(), null);
-            sendResult(token, AUTH_RESULT, "AuthToken", Activity.RESULT_OK);
+
         } catch (IOException e) {
             Log.d("IO error", e.getMessage());
         } catch (GoogleAuthException ge) {
@@ -126,6 +119,7 @@ public class AuthService extends IntentService {
         } catch (Exception ex) {
             Log.d("error", ex.getMessage());
         }
+        return token;
     }
 
     /*

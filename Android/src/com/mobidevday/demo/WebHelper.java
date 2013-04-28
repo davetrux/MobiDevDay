@@ -69,6 +69,21 @@ public class WebHelper {
         return json;
     }
 
+    public String getHttp(String url) throws IOException {
+
+        //Set up the HTTP calls
+        HttpGet request = new HttpGet(url);
+
+        HttpResponse response = mClient.execute(request);
+
+        //Get the data from the body of the response
+        InputStream stream = response.getEntity().getContent();
+     	byte byteArray[] = IOUtils.toByteArray(stream);
+     	String json = new String( byteArray );
+     	stream.close();
+        return json;
+    }
+
 //    public String getHttp(String url, String token) throws IOException {
 //
 //        //Set up the HTTP calls

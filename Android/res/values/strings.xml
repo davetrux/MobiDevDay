@@ -7,6 +7,6 @@
     <string name="basic_account">HTTP Basic</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="login">Get Data</string>
     <string name="domain">Domain</string>
 </resources>
