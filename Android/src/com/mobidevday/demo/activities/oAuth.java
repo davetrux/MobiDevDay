@@ -2,14 +2,11 @@ package com.mobidevday.demo.activities;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.google.android.gms.auth.GoogleAuthUtil;
@@ -20,8 +17,6 @@ import com.mobidevday.demo.R;
 public class oAuth extends BaseActivity {
 
     private Button mLogin;
-    private AccountManager mAccountManager;
-    private String mToken;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +49,7 @@ public class oAuth extends BaseActivity {
 
     private String[] getAccountNames() {
         try {
-            mAccountManager = AccountManager.get(this);
+            AccountManager mAccountManager = AccountManager.get(this);
             Account[] accounts = mAccountManager.getAccountsByType(GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE);
             String[] names = new String[accounts.length];
             for (int i = 0; i < names.length; i++) {

@@ -1,6 +1,5 @@
 package com.mobidevday.demo.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +9,6 @@ import com.mobidevday.demo.AuthService;
 import com.mobidevday.demo.R;
 
 public class Basic extends BaseActivity {
-
-    private Button mLogin;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +20,7 @@ public class Basic extends BaseActivity {
         TextView titleText = (TextView) findViewById(R.id.title);
         titleText.setText(title);
 
-        mLogin = (Button) findViewById(R.id.login);
+        Button mLogin = (Button) findViewById(R.id.login);
         mLogin.setOnClickListener(loginListener);
 
         mPersonList = (ListView) findViewById(R.id.results);
@@ -33,7 +30,7 @@ public class Basic extends BaseActivity {
             public void onClick(View v){
                 //Hide the keyboard
                 InputMethodManager inputManager = (InputMethodManager)
-                                                  getSystemService(Basic.this.INPUT_METHOD_SERVICE);
+                                                  getSystemService(INPUT_METHOD_SERVICE);
 
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                                                      InputMethodManager.HIDE_NOT_ALWAYS);

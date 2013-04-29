@@ -128,7 +128,7 @@ public class WebHelper {
     		{
     			InetAddress inetAddress = (InetAddress)enumIpAddr.nextElement();
 
-    			deviceIp = inetAddress.getHostAddress().toString();
+    			deviceIp = inetAddress.getHostAddress();
 
     			if( !inetAddress.isLoopbackAddress() && InetAddressUtils.isIPv4Address(deviceIp) )
     			{
