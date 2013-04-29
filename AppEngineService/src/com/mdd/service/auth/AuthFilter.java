@@ -7,17 +7,24 @@ import com.sun.jersey.spi.container.ContainerRequestFilter;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import java.util.logging.Logger;
 
 
 public class AuthFilter implements ContainerRequestFilter {
+    private static final Logger log = Logger.getLogger(AuthFilter.class.getName());
+
     @Override
     public ContainerRequest filter(ContainerRequest containerRequest) {
 
         //Get the HTTP authorization header
         String auth = containerRequest.getHeaderValue("authorization");
+
+        log.warning(String.format("Header: %s", auth));
+
         MultivaluedMap<String, String> querystring = containerRequest.getQueryParameters();
         //If the user does not provide any credentials
         if(auth == null && querystring.size() == 0){
+            log.severe("No authentication info found");
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
 
@@ -29,6 +36,7 @@ public class AuthFilter implements ContainerRequestFilter {
 
             //If login or password fail
             if(creds == null || creds.length != 2){
+                log.severe("Invalid basic auth credentials - missing id or password");
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
 
@@ -49,6 +57,7 @@ public class AuthFilter implements ContainerRequestFilter {
 
                 if(payload == null) {
                     String error = validator.getProblem();
+                    log.severe(error);
                     authenticated = false;
                 } else {
                     authenticated = true;
@@ -60,6 +69,7 @@ public class AuthFilter implements ContainerRequestFilter {
             return containerRequest;
         }
         else {
+            log.severe("Authentication failed");
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
     }
