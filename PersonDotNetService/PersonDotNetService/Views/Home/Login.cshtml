@@ -4,13 +4,11 @@
 @{
     ViewBag.Title = "Login";
 }
-
-<h2>Login</h2>
 @using (Html.BeginForm(new {ViewBag.ReturnUrl }))
 {
     <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
+        <legend>Login</legend>
+        <ol style="list-style: none;">
             <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
@@ -21,12 +19,8 @@
                 @Html.PasswordFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
         </ol>
-        <input type="submit" value="Log in" />
+        <input class="btn submit" type="submit" value="Log in" />
     </fieldset>
 }
 
