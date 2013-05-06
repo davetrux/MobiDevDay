@@ -25,18 +25,24 @@ public class WebHelper {
     AbstractHttpClient mClient = new DefaultHttpClient();
 
 
+    /*
+     * Perform an online check
+     */
     public static boolean isOnline(Context ctx){
         ConnectivityManager manager =  (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
         return info != null && info.isConnected();
     }
 
+    /*
+     * Windows Authentication
+     */
     public String getHttp(String url, String userName, String password, String domain) throws IOException {
 
         String deviceIP = getLocalIpAddress();
 
         mClient.getAuthSchemes().register("ntlm", new NTLMSchemeFactory());
-        mClient.getCredentialsProvider().setCredentials(new AuthScope("192.168.0.33", -1),
+        mClient.getCredentialsProvider().setCredentials(new AuthScope("54.235.104.123", -1),
                 new NTCredentials(userName, password, deviceIP, domain));
 
         //Set up the HTTP calls
@@ -52,6 +58,9 @@ public class WebHelper {
         return json;
     }
 
+    /*
+     * Forms(Cookie) based
+     */
     public String getHttp(String url, String cookie) throws IOException {
 
         //Set up the HTTP calls
@@ -68,6 +77,9 @@ public class WebHelper {
         return json;
     }
 
+    /*
+     * No authentication
+     */
     public String getHttp(String url) throws IOException {
 
         //Set up the HTTP calls
@@ -83,6 +95,9 @@ public class WebHelper {
         return json;
     }
 
+    /*
+     * HTTP Basic Authentication
+     */
     public String getHttp(String url, String user, String password) throws IOException {
         //Set up the HTTP calls
         HttpGet request = new HttpGet(url);
@@ -100,6 +115,7 @@ public class WebHelper {
      	stream.close();
         return json;
     }
+
 
     private String createBasicHeader(String userName, String password) {
         String combined = String.format("%s:%s", userName, password);

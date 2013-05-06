@@ -18,6 +18,9 @@ public class AuthService extends IntentService {
         super("AuthService");
     }
 
+    /*
+     * Decide which web service is being requested
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
 
@@ -36,6 +39,9 @@ public class AuthService extends IntentService {
         }
     }
 
+    /*
+     * oAuth
+     */
     private void getOauthData(String url, String token) {
         WebHelper http = new WebHelper();
         String webResult;
@@ -54,6 +60,9 @@ public class AuthService extends IntentService {
         sendResult(webResult, AUTH_RESULT, "oauth-data", result);
     }
 
+    /*
+     * Windows Auth
+     */
     private void getWindowsData(String url, String userName, String password, String domain){
         WebHelper http = new WebHelper();
         String webResult;
@@ -71,6 +80,9 @@ public class AuthService extends IntentService {
         sendResult(webResult, AUTH_RESULT, "windows-data", result);
     }
 
+    /*
+     * Forms Auth
+     */
     private void getFormsData(String url, String cookie){
         WebHelper http = new WebHelper();
         String webResult;
@@ -88,6 +100,9 @@ public class AuthService extends IntentService {
         sendResult(webResult, AUTH_RESULT, "forms-data", result);
     }
 
+    /*
+     * Basic Auth
+     */
     private void getBasicData(String url, String user, String password) {
         WebHelper http = new WebHelper();
         String webResult;
@@ -105,7 +120,9 @@ public class AuthService extends IntentService {
         sendResult(webResult, AUTH_RESULT, "oauth-data", result);
     }
 
-
+    /*
+     * Get Device Token
+     */
     private String authenticateGoogle(String accountName) {
         String token = "";
         try {

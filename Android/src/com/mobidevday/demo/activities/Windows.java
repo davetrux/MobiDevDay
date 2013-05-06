@@ -50,7 +50,7 @@ public class Windows extends BaseActivity {
                 intent.putExtra("domain", domainField.getText().toString().trim());
                 intent.putExtra("username", userNameField.getText().toString().trim());
                 intent.putExtra("password", passwordField.getText().toString().trim());
-                intent.putExtra("url", "http://192.168.0.33/mddw/api/names/11");
+                intent.putExtra("url", "http://54.235.104.123/mddw/api/names/11");
                 startService(intent);
             }
     };

@@ -45,7 +45,7 @@ public class Form extends BaseActivity {
 
         CookieManager.getInstance().removeSessionCookie();
 
-        mWeb.loadUrl("http://192.168.0.33/mddf/");
+        mWeb.loadUrl("http://54.235.104.123/mddf/");
     }
 
     private View.OnClickListener doneListener = new View.OnClickListener(){
@@ -58,7 +58,7 @@ public class Form extends BaseActivity {
                 Intent intent = new Intent(Form.this, AuthService.class);
                 intent.setAction("forms-auth");
                 intent.putExtra("cookie", cookie);
-                intent.putExtra("url", "http://192.168.0.33/mddf/api/names/11");
+                intent.putExtra("url", "http://54.235.104.123/mddf/api/names/11");
                 startService(intent);
 
                 RelativeLayout parent = (RelativeLayout) findViewById(R.id.parentContainer);
